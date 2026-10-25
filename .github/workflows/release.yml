@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Read the version
+        id: meta
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "vsix=shipwreck-$version.vsix" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Package
+        run: |
+          npm pkg set repository.type=git repository.url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+          npx --yes @vscode/vsce@3 package --no-dependencies -o "${{ steps.meta.outputs.vsix }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.vsix }}
+          path: ${{ steps.meta.outputs.vsix }}
+
+      - name: Create the GitHub release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/release-notes.js "${{ steps.meta.outputs.version }}" > release-notes.md
+          gh release create "$GITHUB_REF_NAME" "${{ steps.meta.outputs.vsix }}" \
+            --title "Shipwreck ${{ steps.meta.outputs.version }}" \
+            --notes-file release-notes.md
+
+      - name: Publish to the VS Code Marketplace
+        if: github.ref_type == 'tag' && env.VSCE_PAT != ''
+        run: npx --yes @vscode/vsce@3 publish --packagePath "${{ steps.meta.outputs.vsix }}"
+
+      - name: Publish to Open VSX
+        if: github.ref_type == 'tag' && env.OVSX_PAT != ''
+        run: npx --yes ovsx@0 publish "${{ steps.meta.outputs.vsix }}"

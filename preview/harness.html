@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../dist/styles.css">
+<style>
+/* Simulated VS Code Dark+ theme variables */
+:root {
+  --vscode-font-family: "Segoe UI", system-ui, sans-serif;
+  --vscode-font-size: 13px;
+  --vscode-foreground: #cccccc;
+  --vscode-descriptionForeground: #9c9c9c;
+  --vscode-sideBar-background: #181818;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-sideBarSectionHeader-background: transparent;
+  --vscode-sideBarSectionHeader-border: #2b2b2b;
+  --vscode-panel-border: #2b2b2b;
+  --vscode-toolbar-hoverBackground: #ffffff14;
+  --vscode-menu-background: #1f1f1f;
+  --vscode-menu-foreground: #cccccc;
+  --vscode-menu-border: #454545;
+  --vscode-menu-selectionBackground: #ffffff1a;
+  --vscode-menu-separatorBackground: #454545;
+  --vscode-list-activeSelectionBackground: #04395e;
+  --vscode-list-activeSelectionForeground: #ffffff;
+  --vscode-input-foreground: #cccccc;
+  --vscode-input-background: #313131;
+  --vscode-input-border: #3c3c3c;
+  --vscode-input-placeholderForeground: #989898;
+  --vscode-inputValidation-errorBackground: #5a1d1d;
+  --vscode-inputValidation-errorForeground: #f48771;
+  --vscode-dropdown-background: #313131;
+  --vscode-dropdown-border: #3c3c3c;
+  --vscode-button-background: #0078d4;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #026ec1;
+  --vscode-focusBorder: #007fd4;
+  --vscode-textLink-foreground: #3794ff;
+  --vscode-textBlockQuote-border: #4b4b4b;
+  --vscode-textBlockQuote-background: #1b1b1b;
+  --vscode-textCodeBlock-background: #2d2d2d;
+  --vscode-editor-font-family: "Cascadia Mono", Consolas, monospace;
+  --vscode-badge-background: #616161;
+  --vscode-badge-foreground: #ffffff;
+  --vscode-testing-iconPassed: #73c991;
+  --vscode-testing-iconFailed: #f14c4c;
+  --vscode-progressBar-background: #3794ff;
+  --vscode-editorWarning-foreground: #e2c08d;
+  --vscode-editorWarning-background: #332b20;
+  --vscode-editorError-foreground: #f48771;
+  --vscode-chat-requestBackground: #ffffff14;
+  --vscode-chat-requestBorder: transparent;
+  --vscode-symbolIcon-methodForeground: #b180d7;
+  --vscode-gitDecoration-addedResourceForeground: #81b88b;
+  --vscode-gitDecoration-deletedResourceForeground: #c74e39;
+  --vscode-diffEditor-insertedLineBackground: #2ea04326;
+  --vscode-diffEditor-removedLineBackground: #f851491a;
+  --vscode-editorGroupHeader-tabsBackground: #181818;
+  --vscode-editor-lineHighlightBackground: #ffffff08;
+  --vscode-editorComments-foreground: #6a9955;
+}
+:root.light {
+  --vscode-foreground: #3b3b3b;
+  --vscode-descriptionForeground: #6f6f6f;
+  --vscode-sideBar-background: #f8f8f8;
+  --vscode-editor-background: #ffffff;
+  --vscode-sideBarSectionHeader-border: #e5e5e5;
+  --vscode-panel-border: #e5e5e5;
+  --vscode-toolbar-hoverBackground: #0000000f;
+  --vscode-menu-background: #f8f8f8;
+  --vscode-menu-foreground: #3b3b3b;
+  --vscode-menu-border: #d4d4d4;
+  --vscode-menu-selectionBackground: #00000012;
+  --vscode-menu-separatorBackground: #d4d4d4;
+  --vscode-list-activeSelectionBackground: #0060c0;
+  --vscode-list-activeSelectionForeground: #ffffff;
+  --vscode-input-foreground: #3b3b3b;
+  --vscode-input-background: #ffffff;
+  --vscode-input-border: #cecece;
+  --vscode-input-placeholderForeground: #767676;
+  --vscode-inputValidation-errorBackground: #f2dede;
+  --vscode-inputValidation-errorForeground: #be1100;
+  --vscode-dropdown-background: #ffffff;
+  --vscode-dropdown-border: #cecece;
+  --vscode-button-background: #005fb8;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #0258a8;
+  --vscode-focusBorder: #0090f1;
+  --vscode-textLink-foreground: #006ab1;
+  --vscode-textBlockQuote-border: #d4d4d4;
+  --vscode-textBlockQuote-background: #f3f3f3;
+  --vscode-textCodeBlock-background: #dcdcdc66;
+  --vscode-badge-background: #c4c4c4;
+  --vscode-badge-foreground: #333333;
+  --vscode-testing-iconPassed: #2ea043;
+  --vscode-testing-iconFailed: #e51400;
+  --vscode-progressBar-background: #005fb8;
+  --vscode-editorWarning-foreground: #bf8803;
+  --vscode-editorWarning-background: #fdf6e3;
+  --vscode-editorError-foreground: #e51400;
+  --vscode-chat-requestBackground: #0000000d;
+  --vscode-symbolIcon-methodForeground: #7b3fb4;
+  --vscode-gitDecoration-addedResourceForeground: #1e8a3c;
+  --vscode-gitDecoration-deletedResourceForeground: #d00000;
+  --vscode-diffEditor-insertedLineBackground: #9be29b55;
+  --vscode-diffEditor-removedLineBackground: #ff7b7229;
+  --vscode-editorGroupHeader-tabsBackground: #ececec;
+  --vscode-editor-lineHighlightBackground: #0000000a;
+  --vscode-editorComments-foreground: #008000;
+}
+:root.hc {
+  --vscode-foreground: #ffffff;
+  --vscode-descriptionForeground: #ffffff;
+  --vscode-sideBar-background: #000000;
+  --vscode-editor-background: #000000;
+  --vscode-sideBarSectionHeader-border: #6fc3df;
+  --vscode-panel-border: #6fc3df;
+  --vscode-toolbar-hoverBackground: #ffffff22;
+  --vscode-menu-background: #000000;
+  --vscode-menu-foreground: #ffffff;
+  --vscode-menu-border: #6fc3df;
+  --vscode-menu-selectionBackground: #ffffff33;
+  --vscode-menu-separatorBackground: #6fc3df;
+  --vscode-list-activeSelectionBackground: #000000;
+  --vscode-list-activeSelectionForeground: #ffffff;
+  --vscode-input-foreground: #ffffff;
+  --vscode-input-background: #000000;
+  --vscode-input-border: #6fc3df;
+  --vscode-input-placeholderForeground: #aaaaaa;
+  --vscode-dropdown-background: #000000;
+  --vscode-dropdown-border: #6fc3df;
+  --vscode-button-background: #0078d4;
+  --vscode-button-foreground: #ffffff;
+  --vscode-button-hoverBackground: #3794ff;
+  --vscode-focusBorder: #f38518;
+  --vscode-textLink-foreground: #3794ff;
+  --vscode-textBlockQuote-border: #6fc3df;
+  --vscode-textBlockQuote-background: #000000;
+  --vscode-textCodeBlock-background: #1f1f1f;
+  --vscode-badge-background: #ffffff;
+  --vscode-badge-foreground: #000000;
+  --vscode-testing-iconPassed: #ffffff;
+  --vscode-testing-iconFailed: #f48771;
+  --vscode-progressBar-background: #3794ff;
+  --vscode-editorWarning-foreground: #ffd700;
+  --vscode-editorWarning-background: #000000;
+  --vscode-editorError-foreground: #f48771;
+  --vscode-chat-requestBackground: #ffffff18;
+  --vscode-symbolIcon-methodForeground: #ffffff;
+  --vscode-gitDecoration-addedResourceForeground: #ffffff;
+  --vscode-gitDecoration-deletedResourceForeground: #f48771;
+  --vscode-diffEditor-insertedLineBackground: #ffffff22;
+  --vscode-diffEditor-removedLineBackground: #f4877122;
+  --vscode-editorGroupHeader-tabsBackground: #000000;
+  --vscode-editor-lineHighlightBackground: #ffffff11;
+  --vscode-editorComments-foreground: #7ca668;
+  --vscode-contrastBorder: #6fc3df;
+}
+body { background: var(--vscode-sideBar-background); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+if (location.hash.includes("light")) document.documentElement.className = "light";
+else if (location.hash.includes("hc")) document.documentElement.className = "hc";
+window.__sent = [];
+// Persist setPref like the host does, so the 3s re-snapshot keeps them.
+window.__prefs = {};
+window.acquireVsCodeApi = () => ({
+  postMessage: (m) => {
+    window.__sent.push(m);
+    if (m.type === "setPref") window.__prefs[m.key] = m.value;
+  },
+  getState: () => null,
+  setState: () => {},
+});
+</script>
+<script src="icons.js"></script>
+<script src="../dist/main.webview.js"></script>
+<script>
+// Affogato (active): 40 grouped models, mirrored by its session's model option.
+const affogatoModels = [
+  { value: "sonnet-4.5", name: "Sonnet 4.5", description: "Fast everyday coding", group: "Claude", groupId: "claude-new" },
+  { value: "opus-4.1", name: "Opus 4.1", description: "Deepest reasoning", group: "Claude", groupId: "claude-new" },
+  { value: "haiku-4.5", name: "Haiku 4.5", description: "Smallest and fastest", group: "Claude", groupId: "claude-new" },
+  { value: "sonnet-4", name: "Sonnet 4", description: "Previous generation", group: "Claude", groupId: "claude-new" },
+  { value: "opus-4", name: "Opus 4", group: "Claude", groupId: "claude-new" },
+  { value: "sonnet-3.7", name: "Sonnet 3.7 with an unusually long display name for truncation", description: "Hybrid reasoning", group: "Claude", groupId: "claude-new" },
+  { value: "claude-2", name: "Claude 2", description: "Legacy", group: "Claude", groupId: "claude-old" },
+  { value: "claude-2.1", name: "Claude 2.1", description: "Legacy", group: "Claude", groupId: "claude-old" },
+  { value: "claude-instant", name: "Claude Instant", description: "Legacy", group: "Claude", groupId: "claude-old" },
+  { value: "claude-3-haiku", name: "Claude 3 Haiku", description: "Legacy", group: "Claude", groupId: "claude-old" },
+  { value: "gpt-5", name: "GPT-5", description: "OpenAI flagship", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-5-codex", name: "GPT-5 Codex", description: "Tuned for agentic coding", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-5-mini", name: "GPT-5 mini", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-5-nano", name: "GPT-5 nano", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-4.1", name: "GPT-4.1", description: "Long context", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-4.1-mini", name: "GPT-4.1 mini", group: "OpenAI", groupId: "openai" },
+  { value: "o3", name: "o3", description: "Reasoning", group: "OpenAI", groupId: "openai" },
+  { value: "o4-mini", name: "o4-mini", description: "Fast reasoning", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-oss-120b", name: "gpt-oss 120b", description: "Open weights", group: "OpenAI", groupId: "openai" },
+  { value: "gpt-oss-20b", name: "gpt-oss 20b", description: "Open weights", group: "OpenAI", groupId: "openai" },
+  { value: "gemini-3-pro", name: "Gemini 3 Pro", description: "Long-context reasoning", group: "Google", groupId: "google" },
+  { value: "gemini-3-flash", name: "Gemini 3 Flash", description: "Fast multimodal", group: "Google", groupId: "google" },
+  { value: "gemini-2.5-pro", name: "Gemini 2.5 Pro", group: "Google", groupId: "google" },
+  { value: "gemini-2.5-flash", name: "Gemini 2.5 Flash", group: "Google", groupId: "google" },
+  { value: "gemini-2.5-flash-lite", name: "Gemini 2.5 Flash Lite", group: "Google", groupId: "google" },
+  { value: "gemma-3-27b", name: "Gemma 3 27B", description: "Open weights", group: "Google", groupId: "google" },
+  { value: "gemma-3-12b", name: "Gemma 3 12B", description: "Open weights", group: "Google", groupId: "google" },
+  { value: "gemma-3n", name: "Gemma 3n", description: "On-device", group: "Google", groupId: "google" },
+  { value: "kimi-k2", name: "Kimi K2", description: "Moonshot", group: "Open models", groupId: "open" },
+  { value: "glm-4.6", name: "GLM 4.6", description: "Zhipu", group: "Open models", groupId: "open" },
+  { value: "qwen3-coder", name: "Qwen3 Coder 480B", description: "Alibaba", group: "Open models", groupId: "open" },
+  { value: "qwen3-235b", name: "Qwen3 235B", group: "Open models", groupId: "open" },
+  { value: "deepseek-v3.2", name: "DeepSeek V3.2", group: "Open models", groupId: "open" },
+  { value: "deepseek-r1", name: "DeepSeek R1", description: "Reasoning", group: "Open models", groupId: "open" },
+  { value: "llama-4-maverick", name: "Llama 4 Maverick", group: "Open models", groupId: "open" },
+  { value: "llama-4-scout", name: "Llama 4 Scout", group: "Open models", groupId: "open" },
+  { value: "mistral-large", name: "Mistral Large", group: "Open models", groupId: "open" },
+  { value: "devstral", name: "Devstral", description: "Mistral coding model", group: "Open models", groupId: "open" },
+  { value: "grok-code-fast", name: "Grok Code Fast", group: "Open models", groupId: "open" },
+  { value: "minimax-m2", name: "MiniMax M2", group: "Open models", groupId: "open" },
+];
+const agentModels = [
+  { agentId: "demo-agent", status: "ready", configId: "model", currentValue: "sonnet-4.5", checkedAt: Date.now(),
+    models: affogatoModels.map(({ groupId, ...m }) => m) },
+  { agentId: "opencode", status: "ready", configId: "model", currentValue: "kimi-k2", checkedAt: Date.now(), models: [
+    { value: "kimi-k2", name: "Kimi K2", description: "Default" },
+    { value: "gpt-5", name: "GPT-5", description: "Via OpenAI" },
+    { value: "sonnet-4.5", name: "Sonnet 4.5", description: "Via Anthropic" },
+  ]},
+  { agentId: "devin", status: "auth_required", models: [], checkedAt: Date.now() },
+  { agentId: "qwen", status: "probing", models: [], checkedAt: Date.now() },
+];
+const snapshot = {
+  type: "snapshot",
+  payload: {
+    activeAgentId: "demo-agent",
+    agents: [
+      { id: "demo-agent", name: "Affogato", description: "General-purpose coding agent", version: "0.4.2", source: "registry", installed: true, installKind: "binary",
+        icon: "https://cdn.agentclientprotocol.com/registry/v1/latest/claude-acp.svg",
+        iconSvg: window.__agentIcons?.["claude-acp"], iconMono: true },
+      { id: "opencode", name: "OpenCode", description: "Terminal-first agent", version: "1.1.0", source: "registry", installed: true, installKind: "npx",
+        icon: "https://cdn.agentclientprotocol.com/registry/v1/latest/codex-acp.svg",
+        iconSvg: window.__agentIcons?.["codex-acp"], iconMono: true },
+      { id: "devin", name: "Devin", description: "Cloud software engineer", version: "2.0.0", source: "registry", installed: true, installKind: "binary",
+        icon: "https://cdn.agentclientprotocol.com/registry/v1/latest/devin.svg",
+        iconSvg: window.__agentIcons?.["devin"], iconMono: true },
+      { id: "gemini", name: "Gemini CLI", description: "Google's agent", source: "registry", installed: false, installKind: "npx" },
+      { id: "qwen", name: "Qwen Code", description: "Alibaba's coding agent", version: "0.1.0", source: "registry", installed: true, installKind: "npx" },
+    ],
+    agentModels,
+    connection: { status: "connected", detail: "Devin Agent" },
+    authMethods: [],
+    session: {
+      sessionId: "s-1",
+      agentId: "demo-agent",
+      cwd: "D:\\acp client",
+      busy: true,
+      createdAt: Date.now(),
+      modes: { currentModeId: "code", availableModes: [
+        { id: "ask", name: "Ask", description: "Answer questions only — no file changes" },
+        { id: "plan", name: "Plan", description: "Read-only planning and design" },
+        { id: "code", name: "Code", description: "Read, write and run tools in the workspace" },
+        { id: "full_access", name: "Full access", description: "Run anything without asking" },
+      ]},
+      configOptions: [
+        { id: "agentmode", name: "Mode", type: "select", category: "mode", currentValue: "code", options: [
+          { value: "ask", name: "Ask", description: "Answer questions only" },
+          { value: "plan", name: "Plan", description: "Read-only planning" },
+          { value: "code", name: "Code", description: "Full tool access" },
+        ]},
+        { id: "model", name: "Model", type: "select", category: "model", currentValue: "sonnet-4.5",
+          description: "Model used for this session", options: affogatoModels },
+        { id: "effort", name: "Effort", type: "select", category: "thought_level", currentValue: "medium",
+          description: "How much reasoning the agent applies", options: [
+          { value: "off", name: "Off" },
+          { value: "low", name: "Low" },
+          { value: "medium", name: "Medium" },
+          { value: "high", name: "High" },
+          { value: "max", name: "Max" },
+        ]},
+        { id: "verbosity", name: "Verbosity", type: "select", category: "model_config", currentValue: "normal", options: [
+          { value: "quiet", name: "Quiet" },
+          { value: "normal", name: "Normal" },
+          { value: "loud", name: "Loud" },
+        ]},
+        { id: "cache", name: "Prompt caching", type: "boolean", category: "model_config", currentValue: true },
+        { id: "flavor", name: "Flavor", type: "select", category: "_custom", currentValue: "vanilla", options: [
+          { value: "vanilla", name: "Vanilla" },
+          { value: "chocolate", name: "Chocolate" },
+        ]},
+        { id: "autonomy", name: "Autonomy level", type: "select", category: "_custom", currentValue: "supervised", options: [
+          { value: "read", name: "Read only", description: "Agent may only inspect files" },
+          { value: "supervised", name: "Supervised", description: "Asks before making changes" },
+          { value: "auto", name: "Autonomous", description: "Runs tools without asking" },
+        ]},
+        { id: "service_tier", name: "Service tier", type: "select", category: "model_config", currentValue: "standard", options: [
+          { value: "standard", name: "Standard", description: "Default latency" },
+          { value: "fast", name: "Fast", description: "Priority compute" },
+        ]},
+        { id: "retries", name: "Retries", type: "select", currentValue: "2", options: [
+          { value: "1", name: "1" },
+          { value: "2", name: "2" },
+          { value: "3", name: "3" },
+        ]},
+        { id: "reasoning", name: "Extended reasoning", type: "boolean", currentValue: true },
+        { id: "fast", name: "Fast mode", type: "boolean", currentValue: false },
+      ],
+      availableCommands: [
+        { name: "clear", description: "Clear the current session" },
+        { name: "review", description: "Review uncommitted changes" },
+        { name: "fix", description: "Fix the error at cursor", inputHint: "<error text>" },
+      ],
+      usage: { used: 42100, size: 200000, cost: { amount: 0.18, currency: "USD" } },
+    },
+    canLoadSession: true,
+    canListSessions: true,
+    workspace: {
+      folders: [
+        { name: "acp client", path: "D:\\acp client" },
+        { name: "belle", path: "D:\\belle" },
+      ],
+      branch: "track/chrome",
+    },
+    prefs: {
+      modelFavorites: [
+        { agentId: "demo-agent", value: "gpt-5-codex" },
+        { agentId: "opencode", value: "kimi-k2" },
+      ],
+    },
+    promptCapabilities: { image: true, embeddedContext: true },
+    activeThreadId: "t-1",
+    threadsScope: location.hash === "#threads-all" ? "all" : "workspace",
+    threadsImport: true,
+    threads: [
+      { id: "t-1", title: "Fix registry caching", workspace: "D:\\acp client",
+        createdAt: Date.now() - 6 * 3600000, updatedAt: Date.now() - 4 * 60000,
+        pinned: true, agents: ["demo-agent"],
+        backing: [{ agentId: "demo-agent", sessionId: "s-1", coveredEntries: 12, lastUsedAt: Date.now() - 4 * 60000 }],
+        preview: "The etag lands in globalState and the 304 path skips the parse." },
+      { id: "t-2", title: "Migrate settings to profiles", workspace: "D:\\acp client",
+        createdAt: Date.now() - 2 * 86400000, updatedAt: Date.now() - 30 * 60000,
+        pinned: true, agents: ["opencode"],
+        backing: [{ agentId: "opencode", sessionId: "s-9", coveredEntries: 30, lastUsedAt: Date.now() - 30 * 60000 }],
+        preview: "Profile precedence: workspace > user > defaults." },
+      { id: "t-3", title: "Investigate tokenizer drift in long sessions", workspace: "D:\\belle",
+        createdAt: Date.now() - 5 * 86400000, updatedAt: Date.now() - 3 * 3600000,
+        agents: ["demo-agent", "opencode", "devin"],
+        backing: [
+          { agentId: "demo-agent", sessionId: "s-3a", coveredEntries: 8, lastUsedAt: Date.now() - 3 * 86400000 },
+          { agentId: "opencode", sessionId: "s-3b", coveredEntries: 14, lastUsedAt: Date.now() - 86400000 },
+          { agentId: "devin", sessionId: "s-3c", coveredEntries: 21, lastUsedAt: Date.now() - 3 * 3600000 },
+        ],
+        preview: "Drift shows up after ~9k turns; the recount path fixes it." },
+      { id: "t-4", title: "Add auth flow", workspace: "D:\\acp client",
+        createdAt: Date.now() - 4 * 86400000, updatedAt: Date.now() - 2 * 86400000,
+        agents: ["demo-agent"],
+        backing: [{ agentId: "demo-agent", sessionId: "s-0", coveredEntries: 9, lastUsedAt: Date.now() - 2 * 86400000 }] },
+      { id: "t-5", title: "", workspace: "D:\\belle",
+        createdAt: Date.now() - 8 * 86400000, updatedAt: Date.now() - 7 * 86400000,
+        agents: ["opencode"],
+        backing: [{ agentId: "opencode", sessionId: "s-x9", coveredEntries: 2, lastUsedAt: Date.now() - 7 * 86400000 }] },
+      { id: "t-6", title: "Old experiments", workspace: "D:\\acp client",
+        createdAt: Date.now() - 30 * 86400000, updatedAt: Date.now() - 20 * 86400000,
+        archived: true, agents: ["demo-agent"],
+        backing: [{ agentId: "demo-agent", sessionId: "s-old", coveredEntries: 40, lastUsedAt: Date.now() - 20 * 86400000 }] },
+      { id: "imp:demo-agent:s-imp", title: "Imported session from Affogato", workspace: "D:\\acp client",
+        createdAt: Date.now() - 9 * 86400000, updatedAt: Date.now() - 8 * 86400000,
+        agents: ["demo-agent"],
+        backing: [{ agentId: "demo-agent", sessionId: "s-imp", coveredEntries: 6, lastUsedAt: Date.now() - 8 * 86400000 }],
+        source: { kind: "acp-import", agentId: "demo-agent", sessionId: "s-imp" } },
+    ],
+    activity: /(^#|-)act\b/.test(location.hash) ? [
+      { threadId: "t-2", agentId: "opencode", state: "needs_input" },
+      { threadId: "t-3", agentId: "devin", state: "running" },
+      { threadId: "t-4", agentId: "demo-agent", state: "done" },
+      { threadId: "t-5", agentId: "opencode", state: "failed" },
+    ] : [],
+    entries: [
+      { id: "u1", kind: "user", ts: Date.now(), parts: [
+        { type: "text", text: "Can you refactor the registry cache to use etags and show me the plan first?" },
+        { type: "resource_link", uri: "file:///D:/acp%20client/src/registry.ts", name: "registry.ts" },
+      ]},
+      { id: "t1", kind: "thought", ts: Date.now(), streaming: false, parts: [
+        { type: "text", text: "The cache lives in RegistryService. ETags need a fetch that preserves the response headers, plus a persisted ETag key in globalState. Plan first, then code." },
+      ]},
+      { id: "p1", kind: "plan", ts: Date.now(), entries: [
+        { content: "Read registry.ts and installer.ts call sites", status: "completed", priority: "high" },
+        { content: "Add ETag + If-None-Match handling to the fetch path", status: "in_progress", priority: "high" },
+        { content: "Persist last-known etag in globalState; fall back on 304", status: "pending" },
+        { content: "Warm-cache path for offline startup", status: "pending", priority: "low" },
+      ]},
+      { id: "a1", kind: "agent", ts: Date.now(), parts: [
+        { type: "text", text: "I'll look at the cache path first. Here's what I found:\n\n- `registry.ts` fetches the JSON once per activation with no validators\n- `installer.ts` re-parses it on every `launchSpec` call\n\n```ts\nconst etag = await this.context.globalState.get<string>(\"acp.registryEtag\");\nconst headers = etag ? { \"If-None-Match\": etag } : {};\n```\n\nNow reading the installer call sites." },
+      ]},
+      { id: "tc1", kind: "tool", ts: Date.now(), tool: {
+        toolCallId: "call-1", kind: "read", status: "completed", title: "Read file",
+        locations: [{ path: "D:\\acp client\\src\\registry.ts" }],
+        content: [{ type: "content", content: { type: "resource", uri: "file:///D:/acp%20client/src/registry.ts", mimeType: "text/typescript", text: "export class RegistryService { ... }" } }],
+      }},
+      { id: "tc2", kind: "tool", ts: Date.now(), tool: {
+        toolCallId: "call-2", kind: "edit", status: "completed", title: "Update registry.ts",
+        locations: [{ path: "D:\\acp client\\src\\registry.ts", line: 44 }],
+        content: [{ type: "diff", path: "D:\\acp client\\src\\registry.ts",
+          oldText: "async refresh(): Promise<void> {\n  const res = await fetch(this.url);\n  this.doc = await res.json();\n}",
+          newText: "async refresh(): Promise<void> {\n  const etag = await this.state.get<string>(ETAG_KEY);\n  const res = await fetch(this.url, { headers: etag ? { 'If-None-Match': etag } : {} });\n  if (res.status === 304) return;\n  await this.state.update(ETAG_KEY, res.headers.get('etag'));\n  this.doc = await res.json();\n}" }],
+      }},
+      { id: "h1", kind: "handoff", ts: Date.now(), toAgentId: "opencode", fromAgents: ["demo-agent"], included: 3, omitted: 1,
+        text: "Context from earlier in this thread (with Affogato). This is background — the user's new request follows after it.\n\n### User\nCan you refactor the registry cache to use etags?\n\n[… 1 earlier item omitted — the full transcript is attached]\n\n### Affogato\nI'll look at the cache path first." },
+      { id: "u2", kind: "user", ts: Date.now(), parts: [
+        { type: "text", text: "Continue and implement it" },
+      ]},
+      { id: "tc3", kind: "tool", ts: Date.now(), agentId: "opencode", tool: {
+        toolCallId: "call-3", kind: "execute", status: "in_progress", title: "npm run typecheck",
+        content: [{ type: "terminal", terminalId: "term-9" }],
+        rawInput: { command: "npm", args: ["run", "typecheck"] },
+      }},
+      { id: "perm1", kind: "permission", ts: Date.now(), requestKey: "perm1", state: "pending",
+        toolCall: { toolCallId: "call-4", kind: "edit", title: "Write to registry.ts", locations: [{ path: "D:\\acp client\\src\\registry.ts" }] },
+        options: [
+          { optionId: "o1", name: "Allow once", kind: "allow_once" },
+          { optionId: "o2", name: "Always allow file edits", kind: "allow_always" },
+          { optionId: "o3", name: "Reject", kind: "reject_once" },
+        ]},
+      { id: "a2", kind: "agent", ts: Date.now(), streaming: true, parts: [
+        { type: "text", text: "The diff is staged. While the typecheck runs, the remaining question is where to" },
+      ]},
+    ],
+  },
+};
+
+const moreEntries = [
+  { id: "m-u", kind: "user", ts: Date.now(), parts: [{ type: "text", text: "Why does the cold start take 3 seconds?" }] },
+  { id: "m-th", kind: "thought", ts: Date.now(), streaming: false, parts: [{ type: "text", text: "Likely the registry fetch blocks activation. Check the activation events and the extension host profile before guessing." }] },
+  { id: "m-t1", kind: "tool", ts: Date.now(), tool: { toolCallId: "m1", kind: "search", status: "completed", title: "Search for activationEvents",
+    locations: [{ path: "D:\\acp client\\package.json", line: 21 }, { path: "D:\\acp client\\src\\extension.ts", line: 8 }, { path: "D:\\acp client\\src\\registry.ts", line: 102 }],
+    rawOutput: { matches: 3, files: ["package.json", "src/extension.ts", "src/registry.ts"] } } },
+  { id: "m-t2", kind: "tool", ts: Date.now(), tool: { toolCallId: "m2", kind: "read", status: "completed", title: "Read extension.ts", locations: [{ path: "D:\\acp client\\src\\extension.ts" }] } },
+  { id: "m-t3", kind: "tool", ts: Date.now(), tool: { toolCallId: "m3", kind: "execute", status: "failed", title: "`node --cpu-prof out/extension.js`",
+    content: [{ type: "terminal", terminalId: "term-2" }], rawInput: { command: "node --cpu-prof out/extension.js" } } },
+  { id: "m-n1", kind: "notice", ts: Date.now(), severity: "warning", title: "The agent hit its tool-call limit for this turn", description: "Continue to let it keep going." },
+  { id: "m-a", kind: "agent", ts: Date.now(), parts: [{ type: "text", text: "The registry fetch runs during activation and blocks for the full round trip.\n\n| Phase | Time |\n| --- | --- |\n| Activation | 2.4 s |\n| Webview ready | 0.6 s |\n\n1. Defer `refresh()` until the view is visible\n2. Serve the cached copy first\n\n```js\ncontext.subscriptions.push(view.onDidChangeVisibility(() => registry.refresh()));\n```\n\n> Cached data can be up to a day old." }] },
+  { id: "m-p", kind: "permission", ts: Date.now(), requestKey: "mp", state: "selected", selectedOptionId: "o1",
+    toolCall: { toolCallId: "m5", kind: "edit", title: "Edit extension.ts" }, options: [{ optionId: "o1", name: "Allowed once", kind: "allow_once" }] },
+  { id: "m-mk", kind: "marker", ts: Date.now(), text: "Turn cancelled" },
+  { id: "m-n2", kind: "notice", ts: Date.now(), severity: "error", title: "Agent process exited with code 1" },
+  { id: "m-e", kind: "elicitation", ts: Date.now(), message: "The agent needs a few details to continue", mode: "form", state: "pending",
+    schema: { type: "object", required: ["name"], properties: {
+      name: { type: "string", title: "Project name", description: "Used for the package.json name" },
+      strict: { type: "boolean", title: "Strict mode" },
+      target: { type: "string", title: "Target", enum: ["node", "browser"] } } } },
+];
+const changedFiles = [
+  { path: "D:\\acp client\\src\\registry.ts", add: 24, del: 6 },
+  { path: "D:\\acp client\\webview\\components\\Changes.tsx", add: 148, del: 0, created: true },
+  { path: "D:\\acp client\\webview\\styles.css", add: 120, del: 2 },
+  { path: "D:\\acp client\\src\\providers\\nested\\directory\\for\\truncation\\checks\\someVeryLongFileNameThatShouldTruncate.ts", add: 3, del: 1 },
+  { path: "D:\\acp client\\README.md", add: 2, del: 2 },
+];
+const manyFiles = [
+  ...changedFiles,
+  { path: "D:\\acp client\\src\\types.ts", add: 12, del: 0 },
+  { path: "D:\\acp client\\src\\chatProvider.ts", add: 40, del: 18 },
+  { path: "D:\\acp client\\scripts\\changes-ui-check.js", add: 260, del: 0, created: true },
+  { path: "D:\\belle\\Cargo.toml", add: 1, del: 1 },
+];
+const changesEntries = [
+  { id: "c-u", kind: "user", ts: Date.now(), parts: [{ type: "text", text: "Add etag caching to the registry and show the changed files." }] },
+  { id: "c-a", kind: "agent", ts: Date.now(), parts: [{ type: "text", text:
+    "Updated the fetch path in `src/registry.ts:42` and wired the card into `webview/App.tsx`. " +
+    "The notes in `README.md` and `src\\threads\\store.ts#L12` changed too; see [the installer](src/installer.ts#L12), " +
+    "[types](file:///D:/acp%20client/src/types.ts:5) and [the docs](https://example.com/docs).\n\n" +
+    "Not paths: `e.g.`, `1.2.3`, `package@1.0`, `npm run build`, `Node.js`, `window.location`.\n\n" +
+    "```ts\n// src/registry.ts:42\nimport { x } from \"./webview/App.tsx\";\n```" }] },
+  { id: "c-ch", kind: "changes", ts: Date.now(), files: location.hash.includes("many") ? manyFiles : changedFiles,
+    reverted: ["D:\\acp client\\README.md"] },
+];// Real session/new payloads captured from codex-acp 2.2.2 and claude-agent-acp 0.93.0.
+const realAgents = {
+  codex: {
+    modes: { currentModeId: "agent", availableModes: [
+      { id: "read-only", name: "Read-only", description: "Requires approval to edit files and access the internet." },
+      { id: "workspace-write", name: "Workspace access", description: "Edit workspace files; ask before writing outside the workspace or accessing the network." },
+      { id: "agent", name: "Auto review", description: "Only ask for actions detected as potentially unsafe" },
+      { id: "agent-full-access", name: "Full access", description: "Unrestricted access to the internet and any file on your computer" },
+    ]},
+    configOptions: [
+      { id: "mode", name: "Mode", description: "Approval and sandboxing preset for the session", category: "mode", type: "select", currentValue: "agent", options: [
+        { value: "read-only", name: "Read-only", description: "Requires approval to edit files and access the internet." },
+        { value: "workspace-write", name: "Workspace access", description: "Edit workspace files; ask before writing outside the workspace or accessing the network." },
+        { value: "agent", name: "Auto review", description: "Only ask for actions detected as potentially unsafe" },
+        { value: "agent-full-access", name: "Full access", description: "Unrestricted access to the internet and any file on your computer" },
+      ]},
+      { id: "collaboration_mode", name: "Collaboration mode", description: "How Codex collaborates for subsequent turns", category: "collaboration_mode", type: "select", currentValue: "default", options: [
+        { value: "default", name: "Default" },
+        { value: "plan", name: "Plan", description: "Plan before making changes" },
+      ]},
+      { id: "model", name: "Model", description: "Model Codex uses for the session", category: "model", type: "select", currentValue: "gpt-6-sol", options: [
+        { value: "gpt-6.1-sol", name: "6.1 Sol", description: "Latest workhorse model for coding and everyday work." },
+        { value: "gpt-6-astra", name: "6 Astra", description: "Frontier intelligence for the most demanding work." },
+        { value: "gpt-6-sol", name: "6 Sol", description: "Previous generation workhorse model." },
+        { value: "gpt-6-luna", name: "6 Luna", description: "Fast and affordable model for easier tasks." },
+        { value: "gpt-5.6-sol", name: "5.6 Sol", description: "Older generation workhorse model." },
+      ]},
+      { id: "reasoning_effort", name: "Reasoning effort", description: "How much reasoning effort the model should use", category: "thought_level", type: "select", currentValue: "low", options: [
+        { value: "low", name: "Low", description: "Fast responses with lighter reasoning" },
+        { value: "medium", name: "Medium", description: "Balances speed and reasoning depth for everyday tasks" },
+        { value: "high", name: "High", description: "Greater reasoning depth for complex problems" },
+        { value: "xhigh", name: "Xhigh", description: "Extra high reasoning depth for complex problems" },
+        { value: "max", name: "Max", description: "Maximum reasoning depth for the hardest problems" },
+        { value: "ultra", name: "Ultra", description: "Maximum reasoning with automatic task delegation" },
+      ]},
+      { id: "fast-mode", name: "Fast mode", description: "1.5x speed, increased usage", category: "model_config", type: "boolean", currentValue: false },
+    ],
+  },
+  claude: {
+    modes: { currentModeId: "auto", availableModes: [
+      { id: "default", name: "Manual", description: "Always ask before making changes" },
+      { id: "acceptEdits", name: "Accept edits", description: "Automatically accept all file edits" },
+      { id: "plan", name: "Plan", description: "Create a plan before making changes" },
+      { id: "auto", name: "Auto", description: "Claude handles permission decisions" },
+      { id: "bypassPermissions", name: "Bypass permissions", description: "Accepts all permissions" },
+    ]},
+    configOptions: [
+      { id: "mode", name: "Mode", description: "Session permission mode", category: "mode", type: "select", currentValue: "auto", options: [
+        { value: "default", name: "Manual", description: "Always ask before making changes" },
+        { value: "acceptEdits", name: "Accept edits", description: "Automatically accept all file edits" },
+        { value: "plan", name: "Plan", description: "Create a plan before making changes" },
+        { value: "auto", name: "Auto", description: "Claude handles permission decisions" },
+        { value: "bypassPermissions", name: "Bypass permissions", description: "Accepts all permissions" },
+      ]},
+      { id: "model", name: "Model", description: "AI model to use", category: "model", type: "select", currentValue: "opus", options: [
+        { value: "default", name: "Default (recommended)", description: "glm-5.3[1m]" },
+        { value: "opus", name: "glm-5.3[1m]", description: "Custom Opus model (1M context)" },
+        { value: "claude-fable-5[1m]", name: "Fable 5", description: "Fable 5 · Most capable for your hardest and longest-running tasks" },
+        { value: "sonnet", name: "glm-5.3[1m]", description: "Custom Sonnet model (1M context)" },
+        { value: "haiku", name: "glm-5.3-flash[1m]", description: "Custom Haiku model" },
+      ]},
+      { id: "effort", name: "Effort", description: "Available effort levels for this model", category: "thought_level", type: "select", currentValue: "default", options: [
+        { value: "default", name: "Default" }, { value: "low", name: "Low" }, { value: "medium", name: "Medium" },
+        { value: "high", name: "High" }, { value: "xhigh", name: "Xhigh" }, { value: "max", name: "Max" },
+      ]},
+      { id: "agent", name: "Agent", description: "Main-thread agent persona", type: "select", currentValue: "default", options: [
+        { value: "default", name: "Default", description: "Standard Claude Code agent" },
+        { value: "glm-plan-bug:case-feedback-agent", name: "glm-plan-bug:case-feedback-agent", description: "Submit case feedback to report issues or suggestions. Triggered by the /glm-plan-bug:case-feedback command." },
+        { value: "glm-plan-usage:usage-query-agent", name: "glm-plan-usage:usage-query-agent", description: "Query GLM Coding Plan usage statistics for the current account. Triggered by the /glm-plan-usage:usage-query command." },
+      ]},
+    ],
+  },
+};
+function dispatch() {
+  let snap = snapshot;
+  const real = /^#(codex|claude)/.exec(location.hash);
+  if (real) {
+    const r = realAgents[real[1]];
+    snap = { type: "snapshot", payload: { ...snapshot.payload, agentModels: [],
+      session: { ...snapshot.payload.session, busy: false, modes: r.modes, configOptions: r.configOptions }, entries: [] } };
+  } else   if (location.hash.startsWith("#changes")) {
+    // #changes, #changes-many, #changes-light
+    snap = {
+      type: "snapshot",
+      payload: { ...snapshot.payload, session: { ...snapshot.payload.session, busy: false }, entries: changesEntries },
+    };
+  } else if (location.hash.startsWith("#more")) {
+    snap = {
+      type: "snapshot",
+      payload: { ...snapshot.payload, session: { ...snapshot.payload.session, busy: false }, entries: moreEntries },
+    };
+  } else if (location.hash.startsWith("#home")) {
+    snap = {
+      type: "snapshot",
+      payload: { ...snapshot.payload, entries: [] },
+    };
+  } else if (location.hash === "#fresh") {
+    snap = {
+      type: "snapshot",
+      payload: {
+        ...snapshot.payload,
+        agents: snapshot.payload.agents.map((a, i) => ({ ...a, installed: false, source: "registry", installing: i === 1 })),
+        activeAgentId: null,
+        session: null,
+        entries: [],
+        connection: { status: "disconnected" },
+      },
+    };
+  } else if (location.hash === "#empty") {
+    snap = {
+      type: "snapshot",
+      payload: {
+        ...snapshot.payload,
+        activeAgentId: null,
+        session: null,
+        entries: [],
+        connection: { status: "disconnected" },
+      },
+    };
+  } else if (location.hash === "#continue-chip") {
+    snap = {
+      type: "snapshot",
+      payload: { ...snapshot.payload, pendingAgentId: "devin" },
+    };
+  } else if (location.hash === "#attach-chips") {
+    setTimeout(() => {
+      for (const attachment of [
+        { uri: "file:///d:/acp%20client/src/chatProvider.ts", name: "chatProvider.ts", kind: "file" },
+        { uri: "file:///d:/acp%20client/src/sessionModel.ts", name: "sessionModel.ts", kind: "selection", range: { startLine: 12, endLine: 30 } },
+        { uri: "terminal:///selection", name: "Terminal selection", kind: "terminal" },
+        { uri: "file:///d:/acp%20client/src/types.ts", name: "types.ts", kind: "diagnostic", range: { startLine: 88, endLine: 88 } },
+        { uri: "file:///d:/acp%20client/scripts", name: "scripts", kind: "folder" },
+      ]) window.dispatchEvent(new MessageEvent("message", { data: { type: "attachment", attachment } }));
+      window.dispatchEvent(new MessageEvent("message", { data: { type: "activeEditor", attachment: { uri: "file:///d:/acp%20client/webview/store.ts", name: "store.ts", kind: "selection", range: { startLine: 100, endLine: 140 } } } }));
+    }, 300);
+  } else if (location.hash === "#mention") {
+    setTimeout(() => {
+      const ta = document.querySelector("textarea");
+      if (!ta) return;
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
+      setter.call(ta, "@sess");
+      ta.dispatchEvent(new Event("input", { bubbles: true }));
+      setTimeout(() => window.dispatchEvent(new MessageEvent("message", { data: { type: "mentionResults", results: [
+        { uri: "file:///d:/acp%20client/src/sessionModel.ts", name: "sessionModel.ts", path: "src/sessionModel.ts" },
+        { uri: "file:///d:/acp%20client/src/session.ts", name: "session.ts", path: "src/session.ts" },
+        { uri: "file:///d:/acp%20client/scripts/sessionmodel-check.js", name: "sessionmodel-check.js", path: "scripts/sessionmodel-check.js" },
+        { uri: "file:///d:/acp%20client/src/threads/session.ts", name: "session.ts", path: "src/threads/session.ts" },
+      ] } })), 150);
+    }, 300);
+  } else if (location.hash === "#auth") {
+    snap = {
+      type: "snapshot",
+      payload: {
+        ...snapshot.payload,
+        entries: [],
+        connection: { status: "auth_required" },
+        authMethods: [
+          { id: "oauth", name: "Sign in with OAuth", description: "Opens your browser", type: "agent" },
+          { id: "token", name: "Paste an API token", type: "agent" },
+        ],
+      },
+    };
+  }
+  snap = { ...snap, payload: { ...snap.payload, prefs: { ...snap.payload.prefs, ...window.__prefs } } };
+  window.dispatchEvent(new MessageEvent("message", { data: snap }));
+  window.__session = snapshot.payload.session;
+  window.__snapshot = snapshot.payload;
+  if (location.hash.includes("threads")) {
+    if (location.hash === "#threads-import") {
+      setTimeout(() => window.dispatchEvent(new MessageEvent("message", {
+        data: { type: "nativeSessions", sessions: [
+          { sessionId: "s-imp", title: "Imported session from Affogato", cwd: "D:\\acp client", updatedAt: new Date(Date.now() - 8 * 86400000).toISOString() },
+          { sessionId: "s-n1", title: "Triage the onboarding crash", cwd: "D:\\acp client", updatedAt: new Date(Date.now() - 5 * 3600000).toISOString() },
+          { sessionId: "s-n2", title: "", cwd: "D:\\acp client", updatedAt: new Date(Date.now() - 26 * 3600000).toISOString() },
+          { sessionId: "s-n3", title: "Spike: wasm sandbox for tools", cwd: "D:\\acp client", updatedAt: new Date(Date.now() - 4 * 86400000).toISOString() },
+        ] },
+      })), 350);
+    }
+    setTimeout(() => window.dispatchEvent(new MessageEvent("message", { data: { type: "openHistory" } })), 300);
+    if (location.hash === "#threads-rename") {
+      setTimeout(() => document.querySelector('.thread-actions .icon-btn[title="Rename"]')?.click(), 600);
+    }
+  } else if (location.hash.includes("catalog")) {
+    setTimeout(() => window.dispatchEvent(new MessageEvent("message", { data: { type: "openCatalog" } })), 300);
+  } else if (location.hash === "#agentmenu") {
+    setTimeout(() => document.querySelector(".agent-pick")?.click(), 400);
+  } else if (location.hash.includes("picker") && !window.__pickerOpened) {
+    // #picker, #picker-fav, #picker-auth, #picker-search=<q>; add "light" for the light theme.
+    window.__pickerOpened = true;
+    setTimeout(() => {
+      document.querySelector(".mp-trigger")?.click();
+      setTimeout(() => {
+        if (location.hash.includes("picker-fav")) document.querySelector('.mp-rail-btn[aria-label="Favorites"]')?.click();
+        if (location.hash.includes("picker-auth")) document.querySelector('.mp-rail-btn[aria-label="Devin"]')?.click();
+        const q = /picker-search=([^&]+)/.exec(location.hash);
+        if (q) {
+          const input = document.querySelector(".mp-search");
+          const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+          setter.call(input, decodeURIComponent(q[1]));
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      }, 150);
+    }, 300);
+  }
+}
+const timer = setInterval(() => {
+  if (window.__sent.some((m) => m.type === "ready")) {
+    clearInterval(timer);
+    setTimeout(dispatch, 60);
+  }
+}, 25);
+setTimeout(dispatch, 3000);
+</script>
+</body>
+</html>

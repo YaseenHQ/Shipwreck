@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor">
+  <defs>
+    <mask id="shipwreck-water" maskUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="#fff"/>
+      <path d="M-2 45 C 6 40.5, 12 40.5, 20 45 S 34 49.5, 42 45 S 58 40.5, 66 45 V 66 H -2 Z" fill="#000"/>
+    </mask>
+  </defs>
+  <g mask="url(#shipwreck-water)">
+    <g transform="translate(1 1) rotate(-30 34 42)">
+      <path d="M7 34 H61 L53 49 H17 Z"/>
+      <path d="M29 5 H36 V8 L55 29.5 H36 V36 H29 Z"/>
+    </g>
+  </g>
+  <path d="M4 53 C 10 48, 16 48, 22 53 S 34 58, 40 53 S 52 48, 58 53 S 60 54.5, 60 54.5" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+</svg>

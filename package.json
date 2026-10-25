@@ -1,0 +1,542 @@
+{
+  "name": "shipwreck",
+  "displayName": "Shipwreck",
+  "description": "Chat with any coding agent that speaks the Agent Client Protocol: Claude, Codex, Gemini and more, inside VS Code.",
+  "version": "0.1.1",
+  "publisher": "yaseen",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "keywords": [
+    "acp",
+    "agent client protocol",
+    "ai",
+    "agent",
+    "coding agent"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "media/brand/icon-128.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "shipwreck",
+          "title": "Shipwreck",
+          "icon": "media/brand/shipwreck.svg",
+          "when": "shipwreck.noSecondarySidebar"
+        }
+      ],
+      "secondarySidebar": [
+        {
+          "id": "shipwreck-secondary",
+          "title": "Shipwreck",
+          "icon": "media/brand/shipwreck.svg",
+          "when": "!shipwreck.noSecondarySidebar"
+        }
+      ]
+    },
+    "views": {
+      "shipwreck": [
+        {
+          "id": "shipwreck.chat",
+          "name": "Shipwreck",
+          "type": "webview",
+          "icon": "media/brand/shipwreck.svg",
+          "when": "shipwreck.noSecondarySidebar"
+        }
+      ],
+      "shipwreck-secondary": [
+        {
+          "id": "shipwreck.chatSecondary",
+          "name": "Shipwreck",
+          "type": "webview",
+          "icon": "media/brand/shipwreck.svg",
+          "when": "!shipwreck.noSecondarySidebar"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "shipwreck.openChat",
+        "title": "Open Agent Chat",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.openChatInEditor",
+        "title": "Open Agent Chat in Editor Area",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.newSession",
+        "title": "New Chat",
+        "category": "Shipwreck",
+        "icon": {
+          "light": "media/icons/note-pencil-light.svg",
+          "dark": "media/icons/note-pencil-dark.svg"
+        }
+      },
+      {
+        "command": "shipwreck.showHistory",
+        "title": "Threads",
+        "category": "Shipwreck",
+        "icon": {
+          "light": "media/icons/clock-counter-clockwise-light.svg",
+          "dark": "media/icons/clock-counter-clockwise-dark.svg"
+        }
+      },
+      {
+        "command": "shipwreck.browseRegistry",
+        "title": "Agents",
+        "category": "Shipwreck",
+        "icon": {
+          "light": "media/icons/squares-four-light.svg",
+          "dark": "media/icons/squares-four-dark.svg"
+        }
+      },
+      {
+        "command": "shipwreck.closeHistory",
+        "title": "Close Threads",
+        "category": "Shipwreck",
+        "icon": {
+          "light": "media/icons/clock-counter-clockwise-fill-light.svg",
+          "dark": "media/icons/clock-counter-clockwise-fill-dark.svg"
+        }
+      },
+      {
+        "command": "shipwreck.closeAgents",
+        "title": "Close Agents",
+        "category": "Shipwreck",
+        "icon": {
+          "light": "media/icons/squares-four-fill-light.svg",
+          "dark": "media/icons/squares-four-fill-dark.svg"
+        }
+      },
+      {
+        "command": "shipwreck.openSettings",
+        "title": "Settings",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.refreshRegistry",
+        "title": "Refresh Agent Registry",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.installAgent",
+        "title": "Install Agent…",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.uninstallAgent",
+        "title": "Uninstall Agent",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.selectAgent",
+        "title": "Select Agent…",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.authenticate",
+        "title": "Authenticate Agent",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.cancelTurn",
+        "title": "Cancel Current Turn",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.addCustomAgent",
+        "title": "Add Custom Agent…",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.focusComposer",
+        "title": "Focus Chat Input",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.addSelectionToChat",
+        "title": "Add Selection to Shipwreck",
+        "category": "Shipwreck",
+        "icon": "$(comment-add)"
+      },
+      {
+        "command": "shipwreck.addSymbolToChat",
+        "title": "Add Symbol to Chat",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.addFileToChat",
+        "title": "Add File to Shipwreck",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.addToChat",
+        "title": "Add to Shipwreck",
+        "category": "Shipwreck"
+      },
+      {
+        "command": "shipwreck.addTerminalSelectionToChat",
+        "title": "Add Terminal Selection to Shipwreck",
+        "category": "Shipwreck"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "shipwreck.closeHistory", "when": "false" },
+        { "command": "shipwreck.closeAgents", "when": "false" }
+      ],
+      "view/title": [
+        {
+          "command": "shipwreck.newSession",
+          "when": "view == shipwreck.chat || view == shipwreck.chatSecondary",
+          "group": "navigation@1"
+        },
+        {
+          "command": "shipwreck.showHistory",
+          "when": "view == shipwreck.chat && shipwreck.chatRoute != threads || view == shipwreck.chatSecondary && shipwreck.chatSecondaryRoute != threads",
+          "group": "navigation@2"
+        },
+        {
+          "command": "shipwreck.closeHistory",
+          "when": "view == shipwreck.chat && shipwreck.chatRoute == threads || view == shipwreck.chatSecondary && shipwreck.chatSecondaryRoute == threads",
+          "group": "navigation@2"
+        },
+        {
+          "command": "shipwreck.browseRegistry",
+          "when": "view == shipwreck.chat && shipwreck.chatRoute != catalog || view == shipwreck.chatSecondary && shipwreck.chatSecondaryRoute != catalog",
+          "group": "navigation@3"
+        },
+        {
+          "command": "shipwreck.closeAgents",
+          "when": "view == shipwreck.chat && shipwreck.chatRoute == catalog || view == shipwreck.chatSecondary && shipwreck.chatSecondaryRoute == catalog",
+          "group": "navigation@3"
+        },
+        {
+          "command": "shipwreck.openChatInEditor",
+          "when": "view == shipwreck.chat || view == shipwreck.chatSecondary",
+          "group": "z@1"
+        },
+        {
+          "command": "shipwreck.openSettings",
+          "when": "view == shipwreck.chat || view == shipwreck.chatSecondary",
+          "group": "z@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "shipwreck.addSymbolToChat",
+          "when": "editorTextFocus && resourceScheme == file",
+          "group": "shipwreck@3"
+        },
+        {
+          "command": "shipwreck.addSelectionToChat",
+          "when": "editorHasSelection",
+          "group": "shipwreck@1"
+        },
+        {
+          "command": "shipwreck.addFileToChat",
+          "when": "editorTextFocus",
+          "group": "shipwreck@2"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "shipwreck.addFileToChat",
+          "group": "shipwreck@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "shipwreck.addToChat",
+          "group": "shipwreck@1"
+        }
+      ],
+      "terminal/context": [
+        {
+          "command": "shipwreck.addTerminalSelectionToChat",
+          "group": "shipwreck@1"
+        }
+      ],
+      "scm/resourceState/context": [
+        {
+          "command": "shipwreck.addToChat",
+          "group": "shipwreck@1"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "id": "agents",
+        "title": "Agents",
+        "order": 1,
+        "properties": {
+        "shipwreck.defaultAgent": {
+          "type": "string",
+          "default": "",
+          "order": 1,
+          "markdownDescription": "Agent to start with before you pick one, by registry ID (for example `claude-acp`) or custom agent name. After that, new chats use the agent you picked last."
+        },
+        "shipwreck.prewarm": {
+          "type": "boolean",
+          "default": true,
+          "order": 2,
+          "description": "Start your last agent when VS Code starts, so the first message doesn't wait for it to launch."
+        },
+        "shipwreck.customAgents": {
+          "order": 3,
+          "type": "array",
+          "default": [],
+          "description": "Custom ACP agents to launch directly.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "command"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name of the agent."
+              },
+              "command": {
+                "type": "string",
+                "description": "Executable to spawn."
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [],
+                "description": "Arguments passed to the command."
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "default": {},
+                "description": "Extra environment variables."
+              }
+            }
+          }
+        },
+        "shipwreck.mcpServers": {
+          "type": "object",
+          "default": {},
+          "order": 4,
+          "description": "MCP servers to give every agent, keyed by name. Changes reach the open chat right away, or when its running turn ends.",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "command"
+            ],
+            "properties": {
+              "command": {
+                "type": "string"
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "env": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "shipwreck.ideTools": {
+          "type": "boolean",
+          "default": true,
+          "order": 5,
+          "markdownDescription": "Give agents a `vscode` MCP server with editor tools: diagnostics, open editors, selection, definitions, references, hover and symbols. Applies to new chats."
+        },
+        "shipwreck.registryUrl": {
+          "type": "string",
+          "default": "https://cdn.agentclientprotocol.com/registry/v1/latest/registry.json",
+          "order": 6,
+          "description": "Where the agent catalog comes from. Change it only to use a mirror or your own registry."
+        },
+        "shipwreck.acpV2": {
+          "type": "boolean",
+          "default": false,
+          "order": 7,
+          "description": "Use the draft ACP v2 protocol with agents that support it. Agents that only speak v1 keep using v1. Applies when an agent next starts."
+        }
+        }
+      },
+      {
+        "id": "chat",
+        "title": "Chat",
+        "order": 2,
+        "properties": {
+        "shipwreck.context.activeFile": {
+          "type": "boolean",
+          "default": true,
+          "order": 1,
+          "description": "Include the active file or selection in each message by default. Toggle its chip to exclude it for one message."
+        },
+        "shipwreck.showCost": {
+          "type": "boolean",
+          "default": false,
+          "order": 2,
+          "description": "Show what the session has cost so far next to the context meter, when the agent reports it."
+        },
+        "shipwreck.newChatShortcut": {
+          "type": "boolean",
+          "default": false,
+          "order": 3,
+          "markdownDescription": "Use `Ctrl+N` (`Cmd+N` on macOS) for New Chat while the chat has focus."
+        },
+        "shipwreck.codeLens.todo": {
+          "type": "boolean",
+          "default": true,
+          "order": 4,
+          "description": "Show \"Implement with <agent>\" above TODO and FIXME comments."
+        }
+        }
+      },
+      {
+        "id": "threads",
+        "title": "Threads",
+        "order": 3,
+        "properties": {
+        "shipwreck.threads.carryContext": {
+          "type": "boolean",
+          "default": true,
+          "order": 1,
+          "description": "When you switch agents in a thread, give the new agent a summary of the conversation so far and a link to the full transcript. Turn off to start the new agent with only your next message."
+        },
+        "shipwreck.switchWhileRunning": {
+          "type": "string",
+          "enum": [
+            "keepRunning",
+            "ask"
+          ],
+          "enumDescriptions": [
+            "The running turn keeps going in the background.",
+            "Ask whether to keep it going or stop it."
+          ],
+          "default": "keepRunning",
+          "order": 2,
+          "description": "What happens to a running turn when you switch agents, open another thread or start a new chat."
+        },
+        "shipwreck.threads.scope": {
+          "type": "string",
+          "enum": [
+            "workspace",
+            "all"
+          ],
+          "enumDescriptions": [
+            "Threads started in this workspace.",
+            "Threads from every workspace."
+          ],
+          "default": "workspace",
+          "order": 3,
+          "description": "Which threads the Threads list shows first."
+        },
+        "shipwreck.threads.importFromAgents": {
+          "type": "boolean",
+          "default": true,
+          "order": 4,
+          "description": "List the connected agent's own past sessions in Threads, so you can import them."
+        }
+        }
+      },
+      {
+        "id": "safety",
+        "title": "Permissions and changes",
+        "order": 4,
+        "properties": {
+        "shipwreck.autoApprovePermissions": {
+          "type": "string",
+          "enum": [
+            "never",
+            "allowOnce",
+            "always"
+          ],
+          "enumDescriptions": [
+            "Ask every time.",
+            "Allow each request once, without asking.",
+            "Allow for the rest of the session when the agent offers that, otherwise once."
+          ],
+          "default": "never",
+          "order": 1,
+          "description": "Answer agent permission requests for you. Agents can then edit files and run commands without asking."
+        },
+        "shipwreck.changeSnapshots": {
+          "type": "boolean",
+          "default": true,
+          "order": 2,
+          "description": "Snapshot your workspace with Git at the start and end of each turn, so Changes lists every file the agent touched, including through terminal commands, and can undo them. Snapshots live in the extension's storage, never in your repository. Without Git, only edits made through the editor are tracked."
+        }
+        }
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "shipwreck.focusComposer",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l"
+      },
+      {
+        "command": "shipwreck.addSelectionToChat",
+        "key": "alt+k",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "shipwreck.newSession",
+        "key": "ctrl+n",
+        "mac": "cmd+n",
+        "when": "(focusedView == shipwreck.chat || focusedView == shipwreck.chatSecondary) && config.shipwreck.newChatShortcut"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "node scripts/attachments-check.js && node scripts/configoptions-check.js && node scripts/connection-check.js && node scripts/handoff-check.js && node scripts/ide-check.js && node scripts/lifecycle-check.js && node scripts/lifecycle-stdio-check.js && node scripts/pool-check.js && node scripts/sessionmodel-check.js && node scripts/snapshot-check.js && node scripts/threadstore-check.js && node scripts/v2-check.js",
+    "package": "node esbuild.js --production && npx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "^1.9.0"
+  },
+  "devDependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "@types/diff": "^7.0.2",
+    "@types/marked": "^6.0.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
+    "@types/vscode": "^1.85.0",
+    "diff": "^7.0.0",
+    "dompurify": "^3.4.17",
+    "esbuild": "^0.25.0",
+    "highlight.js": "^11.10.0",
+    "marked": "^15.0.0",
+    "marked-highlight": "^2.2.4",
+    "playwright-core": "^1.52.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.8.0"
+  }
+}

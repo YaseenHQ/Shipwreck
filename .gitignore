@@ -1,0 +1,11 @@
+node_modules/
+dist/
+out/
+*.vsix
+.env
+.DS_Store
+.ref/
+preview/*.png
+preview/*.log
+preview/*.patch
+preview/lifecycle-auth-snapshot.json
